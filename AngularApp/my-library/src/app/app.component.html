@@ -1,8 +1,8 @@
 <div class="appContainer" (window:resize)="onResize($event)">
     <div style="height: 80vh;">
-        <mat-toolbar color="primary">
+        <mat-toolbar color="primary" *ngIf="isLogin">
             <mat-toolbar-row>
-                <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+                <button mat-icon-button *ngIf="isLogin" (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
               <mat-icon>menu</mat-icon>
             </button>
                 <img src="https://pngimage.net/wp-content/uploads/2018/05/book-png-logo-3.png" alt="" class="bookLogo">
@@ -26,12 +26,12 @@
                     <a class="bookSettings" mat-list-item (click)="openDialog()">
                         <mat-icon>settings</mat-icon>
                     </a>
-
                     <a mat-list-item (click)="logout()">Odjavi se</a>
                 </mat-nav-list>
             </mat-sidenav>
             <mat-sidenav-content fxFlexFill class="contentApp">
                 <router-outlet></router-outlet>
+
             </mat-sidenav-content>
         </mat-sidenav-container>
         <mat-toolbar class="appFooter" color="primary">

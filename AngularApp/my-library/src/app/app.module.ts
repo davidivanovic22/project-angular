@@ -20,6 +20,7 @@ import { AuthenticationService } from 'src/services/authentication.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './module/jwt.interceptor';
 import { ErrorInterceptor } from './module/error-interceptor';
+import { DataService } from 'src/services/data.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ErrorInterceptor } from './module/error-interceptor';
   providers: [
     AuthenticationService,
     fakeBackendProvider,
+    DataService,
     DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

@@ -15,8 +15,8 @@
                 </mat-form-field>
             </div>
             <div class="loginButtons">
-                <button class="primaryBtn" mat-button>Prijavi se</button>
-                <button routerLink="/register" class="secondaryBtn" mat-button>Registruj se</button>
+                <button class="primaryBtn" mat-button [disabled]=" !loginForm.valid ">Prijavi se</button>
+                <button routerLink="/register " class="secondaryBtn " mat-button>Registruj se</button>
             </div>
         </form>
     </div>

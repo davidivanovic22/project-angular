@@ -1,11 +1,13 @@
 
-import { Component, OnInit, OnChanges, DoCheck } from '@angular/core';
+import { Component, OnInit, OnChanges, DoCheck, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { BookSettingsComponent } from 'src/book-home/book-settings/book-settings.component';
 import { AuthenticationService } from 'src/services/authentication.service';
+import { Subscription } from 'rxjs';
+import { DataService } from 'src/services/data.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -31,11 +33,13 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
+  isLogin = false;
+  dataPassed: any;
+  subscription: Subscription;
+  isActiveLogOut = true;
   sidenavWidth = 4;
   isDarkActive = false;
   isLightActive = true;
-  cols;
   deviceInfo;
   responsive = true;
   ngStyle: string;
@@ -45,18 +49,38 @@ export class AppComponent implements OnInit {
   isMobile = false;
   isTablet = true;
   isDesktopDevice = true;
-  constructor(private deviceService: DeviceDetectorService,  private router: Router,
-    private authenticationService: AuthenticationService, public dialog: MatDialog) {
 
+  @ViewChild('sidenav', { static: false }) sidenav;
+
+  constructor(private deviceService: DeviceDetectorService, private router: Router,
+    private authenticationService: AuthenticationService, public dialog: MatDialog, private ds: DataService) {
+    this.subscription = this.ds.getData().subscribe(x => {
+      this.dataPassed = x;
+      localStorage.setItem('is_log', this.dataPassed);
+      if (this.dataPassed === "0") {
+        this.isLogin = false;
+      } else if (this.dataPassed === "1") {
+        this.isLogin = true;
+      }
+    });
+  }
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.cols = 1;
+    if (localStorage.getItem('is_log') === "0") {
+      this.isLogin = false;
+    } else if (localStorage.getItem('is_log') === "1") {
+      this.isLogin = true;
+    }
     this.deviceInfo = this.deviceService.getDeviceInfo();
     //this.isMobile = this.deviceService.isMobile();
     this.isTablet = this.deviceService.isTablet();
     this.isDesktopDevice = this.deviceService.isDesktop();
     this.changeThemeLoad();
+
   }
   onResize(event) {
     if (parseInt(event.target.innerWidth) <= 480) {
@@ -83,19 +107,6 @@ export class AppComponent implements OnInit {
   });
 
 
-  increase() {
-    this.sidenavWidth = 15;
-    console.log('increase sidenav width');
-  }
-  decrease() {
-    this.sidenavWidth = 4;
-    console.log('decrease sidenav width');
-  }
-
-  logout() {
-    this.authenticationService.logout();
-    this.router.navigate(['/login']);
-  }
   changeThemeLoad() {
 
     console.log("U metodi:", localStorage.getItem("bk_a"));
@@ -108,4 +119,21 @@ export class AppComponent implements OnInit {
 
     }
   }
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
+    this.isLogin = false;
+    this.dataPassed = "0";
+    localStorage.setItem('is_log', this.dataPassed);
+    if (this.dataPassed === "0") {
+      this.isLogin = false;
+    } else if (this.dataPassed === "1") {
+      this.isLogin = true;
+    }
+      this.sidenav.close();
+    
+  }
 }
+
+
+

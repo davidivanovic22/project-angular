@@ -13,7 +13,7 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerForm  = new FormGroup({
+  registerForm = new FormGroup({
     firstName: new FormControl(),
     lastName: new FormControl(),
     username: new FormControl(),
@@ -36,18 +36,18 @@ export class RegisterComponent implements OnInit {
   }
   onSubmit() {
     if (this.registerForm.invalid) {
-      return;
+      return false;
+    } else {
+      this.userService.register(this.registerForm.value)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.alertService.success('Registration successful', true);
+            this.router.navigate(['/login']);
+          },
+          error => {
+            this.alertService.error(error);
+          });
     }
-
-    this.userService.register(this.registerForm.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.alertService.success('Registration successful', true);
-          this.router.navigate(['/login']);
-        },
-        error => {
-          this.alertService.error(error);
-        });
   }
 }
