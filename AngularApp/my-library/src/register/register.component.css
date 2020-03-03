@@ -1,0 +1,22 @@
+.registerWrapper {
+    text-align: center !important;
+    margin-top: 5em;
+    margin-left: calc(50% - 8em);
+    margin-right: calc(50% - 8em);
+}
+
+.secondaryBtn {
+    margin-left: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.registerFormGroup {
+    margin-top: 1em;
+}
+
+@media only screen and (max-width: 480px) {
+    .registerWrapper {
+        margin-top: 2em;
+    }
+}

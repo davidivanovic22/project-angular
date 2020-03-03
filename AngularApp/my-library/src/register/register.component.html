@@ -1,0 +1,35 @@
+<div class="registerContainer">
+    <div class="registerWrapper">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <h2>Registruj se</h2>
+            <div class="registerFormGroup form-group">
+                <mat-form-field class="registerInputField example-full-width">
+                    <mat-label>Ime</mat-label>
+                    <input matInput formControlName="firstName">
+                </mat-form-field>
+            </div>
+            <div class="registerFormGroup form-group">
+                <mat-form-field class="registerInputField example-full-width">
+                    <mat-label>Ime</mat-label>
+                    <input matInput formControlName="lastName">
+                </mat-form-field>
+            </div>
+            <div class="registerFormGroup form-group">
+                <mat-form-field class="registerInputField example-full-width">
+                    <mat-label>Korisnicko ime</mat-label>
+                    <input matInput formControlName="username">
+                </mat-form-field>
+            </div>
+            <div class="registerFormGroup form-group">
+                <mat-form-field class="registerInputField example-full-width">
+                    <mat-label>Lozinka</mat-label>
+                    <input type="password" matInput formControlName="password">
+                </mat-form-field>
+            </div>
+            <div class="registerButtons">
+                <button class="primaryBtn" mat-button>Registruj se</button>
+                <button routerLink="/login" class="secondaryBtn" mat-button>Prijavi se</button>
+            </div>
+        </form>
+        <div>
+        </div>

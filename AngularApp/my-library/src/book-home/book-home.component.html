@@ -1,0 +1,23 @@
+<div class="bookCardContainer">
+
+    <mat-card *ngFor="let img of obs | async" class="bookCard example-card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{img.name}}</mat-card-title>
+            <mat-card-subtitle>{{img.subname}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image class="bookImg" src="{{img.url}}" alt="David">
+        <mat-card-content>
+            <p>
+                Naziv knjige, Autor
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button class="primaryBtn" mat-button>Pregled</button>
+            <button class="secondaryBtn" mat-button>Poruči</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+<div class="bookPaginatorContainer">
+    <mat-paginator class="bookPaginator" fixed [pageSizeOptions]="[30]"></mat-paginator>
+</div>

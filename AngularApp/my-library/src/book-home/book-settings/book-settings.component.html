@@ -1,0 +1,11 @@
+<div>
+    <label class="bookSettingsTitle"><h2>Izberite temu</h2></label>
+    <mat-radio-group [selected]="0">
+        <div>
+            <mat-radio-button [checked]="active1" #radioBtnLight class="radioBtnBookSettings" (change)="changeTheme(radioBtnLight)" value="0">Svetla</mat-radio-button>
+        </div>
+        <div>
+            <mat-radio-button [checked]="active2" #radioBtnDark class="radioBtnBookSettings" (change)="changeTheme(radioBtnDark)" value="1">Tamna</mat-radio-button>
+        </div>
+    </mat-radio-group>
+</div>

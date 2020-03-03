@@ -1,0 +1,23 @@
+<div class="loginContainer">
+    <div class="loginWrapper">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <h2>Prijavi se</h2>
+            <div class="loginFormGroup form-group">
+                <mat-form-field class="loginInputField example-full-width">
+                    <mat-label>Korisnicko ime</mat-label>
+                    <input matInput formControlName="username">
+                </mat-form-field>
+            </div>
+            <div class="loginFormGroup form-group">
+                <mat-form-field class="loginInputField example-full-width">
+                    <mat-label>Lozinka</mat-label>
+                    <input type="password" matInput formControlName="password">
+                </mat-form-field>
+            </div>
+            <div class="loginButtons">
+                <button class="primaryBtn" mat-button>Prijavi se</button>
+                <button routerLink="/register" class="secondaryBtn" mat-button>Registruj se</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="appContainer" (window:resize)="onResize($event)">
+    <div style="height: 80vh;">
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+              <mat-icon>menu</mat-icon>
+            </button>
+                <img src="https://pngimage.net/wp-content/uploads/2018/05/book-png-logo-3.png" alt="" class="bookLogo">
+                <span class="menu-spacer"></span>
+                <div fxShow="true" fxHide.lt-md>
+                    <a routerLink="/" mat-button>Home</a>
+                    <a routerLink="/book-add-cart" class="booAddCart" mat-button><i matBadge="1" matBadgeColor="accent" [matBadgeHidden]="true" class="material-icons">
+                    add_shopping_cart
+                    </i></a>
+                    <a mat-button (click)="logout()">Odjavi se</a>
+                </div>
+            </mat-toolbar-row>
+        </mat-toolbar>
+        <mat-sidenav-container fxFlexFill>
+            <mat-sidenav opened="{{isMobile}}" #sidenav mode="side">
+                <mat-nav-list>
+                    <a routerLink="/" mat-list-item>Home</a>
+                    <a routerLink="/book-add-cart" mat-list-item><i matBadge="1" matBadgeColor="accent" [matBadgeHidden]="true" class="material-icons">
+                    add_shopping_cart
+                    </i></a>
+                    <a class="bookSettings" mat-list-item (click)="openDialog()">
+                        <mat-icon>settings</mat-icon>
+                    </a>
+
+                    <a mat-list-item (click)="logout()">Odjavi se</a>
+                </mat-nav-list>
+            </mat-sidenav>
+            <mat-sidenav-content fxFlexFill class="contentApp">
+                <router-outlet></router-outlet>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+        <mat-toolbar class="appFooter" color="primary">
+            <mat-toolbar-row>
+                <mat-menu #appMenu="matMenu">
+                    <button (click)="openDialog()" mat-menu-item>Settings</button>
+                </mat-menu>
+
+                <button mat-icon-button [matMenuTriggerFor]="appMenu">
+                    <mat-icon>settings</mat-icon>
+                  </button>
+
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </div>
+    <!-- <div class="tableWrapper example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="weight">
+            <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="symbol">
+            <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div> -->
