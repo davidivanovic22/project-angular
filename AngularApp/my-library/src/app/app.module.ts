@@ -1,3 +1,4 @@
+import { BookHomeComponent } from './../book-home/book-home.component';
 import { fakeBackendProvider } from './module/fake-backend';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -5,7 +6,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { routerComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe, LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -21,15 +21,16 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './module/jwt.interceptor';
 import { ErrorInterceptor } from './module/error-interceptor';
 import { DataService } from 'src/services/data.service';
+import { routingComponents } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routerComponents,
     BookSettingsComponent,
     BookAddCartComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    BookHomeComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -39,7 +40,8 @@ import { DataService } from 'src/services/data.service';
     ReactiveFormsModule,
     FlexLayoutModule,
     DeviceDetectorModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,    
+    routingComponents
   ],
   entryComponents: [
     BookSettingsComponent

@@ -19,4 +19,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routerComponents = [BookHomeComponent, BookAddCartComponent];
+export const routingComponents = RouterModule.forRoot(routes);

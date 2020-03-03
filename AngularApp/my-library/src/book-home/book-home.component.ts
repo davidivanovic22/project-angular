@@ -89,4 +89,4 @@ export class BookHomeComponent implements OnInit {
     console.log('decrease sidenav width');
   }
 
-} 
+}  

@@ -8,6 +8,7 @@ import { BookSettingsComponent } from 'src/book-home/book-settings/book-settings
 import { AuthenticationService } from 'src/services/authentication.service';
 import { Subscription } from 'rxjs';
 import { DataService } from 'src/services/data.service';
+import { User } from './module/user';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -32,7 +33,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit {  
   isLogin = false;
   dataPassed: any;
   subscription: Subscription;
@@ -49,20 +50,22 @@ export class AppComponent implements OnInit {
   isMobile = false;
   isTablet = true;
   isDesktopDevice = true;
+  currentUser: User;
 
   @ViewChild('sidenav', { static: false }) sidenav;
 
   constructor(private deviceService: DeviceDetectorService, private router: Router,
     private authenticationService: AuthenticationService, public dialog: MatDialog, private ds: DataService) {
-    this.subscription = this.ds.getData().subscribe(x => {
-      this.dataPassed = x;
-      localStorage.setItem('is_log', this.dataPassed);
-      if (this.dataPassed === "0") {
-        this.isLogin = false;
-      } else if (this.dataPassed === "1") {
-        this.isLogin = true;
-      }
-    });
+      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    // this.subscription = this.ds.getData().subscribe(x => {
+    //   this.dataPassed = x;
+    //   localStorage.setItem('is_log', this.dataPassed);
+    //   if (this.dataPassed === "0") {
+    //     this.isLogin = false;
+    //   } else if (this.dataPassed === "1") {
+    //     this.isLogin = true;
+    //   }
+    // });
   }
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
@@ -122,16 +125,6 @@ export class AppComponent implements OnInit {
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
-    this.isLogin = false;
-    this.dataPassed = "0";
-    localStorage.setItem('is_log', this.dataPassed);
-    if (this.dataPassed === "0") {
-      this.isLogin = false;
-    } else if (this.dataPassed === "1") {
-      this.isLogin = true;
-    }
-      this.sidenav.close();
-    
   }
 }
 

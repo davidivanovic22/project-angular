@@ -1,8 +1,8 @@
 <div class="appContainer" (window:resize)="onResize($event)">
     <div style="height: 80vh;">
-        <mat-toolbar color="primary" *ngIf="isLogin">
+        <mat-toolbar color="primary" *ngIf="currentUser">
             <mat-toolbar-row>
-                <button mat-icon-button *ngIf="isLogin" (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+                <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
               <mat-icon>menu</mat-icon>
             </button>
                 <img src="https://pngimage.net/wp-content/uploads/2018/05/book-png-logo-3.png" alt="" class="bookLogo">
@@ -17,7 +17,7 @@
             </mat-toolbar-row>
         </mat-toolbar>
         <mat-sidenav-container fxFlexFill>
-            <mat-sidenav opened="{{isMobile}}" #sidenav mode="side">
+            <mat-sidenav opened="{{isMobile}}" #sidenav mode="side" *ngIf="currentUser">
                 <mat-nav-list>
                     <a routerLink="/" mat-list-item>Home</a>
                     <a routerLink="/book-add-cart" mat-list-item><i matBadge="1" matBadgeColor="accent" [matBadgeHidden]="true" class="material-icons">
@@ -47,30 +47,3 @@
             </mat-toolbar-row>
         </mat-toolbar>
     </div>
-    <!-- <div class="tableWrapper example-container mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource">
-
-        <ng-container matColumnDef="position">
-            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="weight">
-            <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="symbol">
-            <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-</div> -->
