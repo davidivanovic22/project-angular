@@ -1,27 +1,27 @@
-import { BookHomeComponent } from './../book-home/book-home.component';
-import { fakeBackendProvider } from './module/fake-backend';
-
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DatePipe, LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { materialModule } from './app-material.module';
-import { MatDialogRef } from '@angular/material/dialog';
-import { DeviceDetectorModule } from 'ngx-device-detector';
 import { BookSettingsComponent } from 'src/book-home/book-settings/book-settings.component';
 import { BookAddCartComponent } from 'src/book-home/book-add-cart/book-add-cart.component';
-import { RegisterComponent } from '../register/register.component';
-import { LoginComponent } from '../login/login.component';
+import { RegisterComponent } from 'src/register/register.component';
+import { LoginComponent } from 'src/login/login.component';
+import { BookHomeComponent } from 'src/book-home/book-home.component';
+import { materialModule } from './app-material.module';
+import { routingComponents } from './app-routing.module';
 import { AuthenticationService } from 'src/services/authentication.service';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { fakeBackendProvider } from './module/fake-backend';
+import { DataService } from 'src/services/data.service';
 import { JwtInterceptor } from './module/jwt.interceptor';
 import { ErrorInterceptor } from './module/error-interceptor';
-import { DataService } from 'src/services/data.service';
-import { routingComponents } from './app-routing.module';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DeviceDetectorModule } from 'ngx-device-detector';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DatePipe, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDialogRef } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
